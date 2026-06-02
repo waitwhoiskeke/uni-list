@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University Guide — Anakya Danke Cetta Akhbar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d12;
+    --paper: #f9f7f2;
+    --cream: #f2ede3;
+    --gold: #c9a84c;
+    --gold-light: #e8d4a0;
+    --teal: #1a6e72;
+    --teal-light: #e8f4f5;
+    --rose: #b54a4a;
+    --rose-light: #faeaea;
+    --sky: #2b5ea7;
+    --sky-light: #e8eef9;
+    --green: #2d7a4f;
+    --green-light: #e8f5ee;
+    --border: #d8d0c0;
+    --muted: #6e6555;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--teal), var(--gold));
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-sub {
+    color: #b0a898;
+    font-size: 14px;
+    max-width: 640px;
+    margin-top: 16px;
+  }
+
+  /* ── PROFILE BANNER ── */
+  .profile-band {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+    align-items: flex-start;
+  }
+  .profile-item { }
+  .profile-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .profile-value {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px 2px 2px 0;
+  }
+  .badge-gold { background: var(--gold-light); color: #7a5a10; border: 1px solid var(--gold); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); border: 1px solid #9ecfd1; }
+  .badge-sky { background: var(--sky-light); color: var(--sky); border: 1px solid #a4b8e0; }
+  .badge-green { background: var(--green-light); color: var(--green); border: 1px solid #9dd0b4; }
+  .badge-rose { background: var(--rose-light); color: var(--rose); border: 1px solid #d89898; }
+
+  /* ── NAVIGATION ── */
+  .nav-tabs {
+    background: var(--ink);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--paper); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── CONTENT ── */
+  .content { padding: 0 40px 60px; }
+
+  .section { display: none; padding-top: 40px; }
+  .section.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .section-header p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ── INFO BOX ── */
+  .infobox {
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    border-left: 4px solid;
+  }
+  .infobox-gold { background: var(--gold-light); border-color: var(--gold); }
+  .infobox-teal { background: var(--teal-light); border-color: var(--teal); }
+  .infobox-rose { background: var(--rose-light); border-color: var(--rose); }
+  .infobox-sky { background: var(--sky-light); border-color: var(--sky); }
+  .infobox-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .infobox p, .infobox ul { font-size: 13px; color: var(--ink); }
+  .infobox ul { padding-left: 18px; margin-top: 6px; }
+  .infobox li { margin-bottom: 3px; }
+
+  /* ── UNIVERSITY CARD ── */
+  .uni-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .uni-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .uni-card-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .uni-rank-badge {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .uni-card-title { flex: 1; }
+  .uni-card-title h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .uni-card-title .uni-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .uni-accept-rate {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .uni-accept-rate .rate-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .uni-accept-rate .rate-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .rate-reach { color: var(--rose); }
+  .rate-likely { color: var(--green); }
+  .rate-match { color: var(--sky); }
+
+  .uni-card-body {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px 28px;
+  }
+  @media (max-width: 700px) {
+    .uni-card-body { grid-template-columns: 1fr 1fr; }
+    .uni-card-header { flex-wrap: wrap; }
+    .profile-band { padding: 16px 20px; }
+    .content { padding: 0 20px 40px; }
+    .nav-tabs { padding: 0 20px; }
+    .header { padding: 32px 20px 28px; }
+    .section-header h2 { font-size: 22px; }
+  }
+  .uni-field-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .uni-field-value {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .uni-field-value a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .uni-field-value a:hover { text-decoration: underline; }
+  .uni-field-value .small { font-size: 11.5px; font-weight: 400; color: var(--muted); display: block; margin-top: 2px; }
+
+  .uni-card-footer {
+    padding: 14px 24px;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .uni-card-footer strong { color: var(--ink); }
+
+  .category-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 36px 0 20px;
+  }
+  .category-divider .cat-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .category-divider .cat-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── GARUDA SECTION ── */
+  .garuda-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .garuda-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  table.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  table.info-table th {
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--cream);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  table.info-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #ece8e0;
+    vertical-align: top;
+  }
+  table.info-table tr:last-child td { border-bottom: none; }
+  table.info-table tr:hover td { background: #faf9f5; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    margin: 16px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .tl-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+  .tl-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  /* ── ASSESSMENT TABLE ── */
+  .assessment-wrap {
+    overflow-x: auto;
+  }
+  table.assessment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    min-width: 700px;
+  }
+  table.assessment-table th {
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  table.assessment-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  table.assessment-table tr:hover td { background: var(--cream); }
+  .chance-high { color: var(--green); font-weight: 600; }
+  .chance-med { color: var(--sky); font-weight: 600; }
+  .chance-low { color: var(--rose); font-weight: 600; }
+  .chance-very-low { color: #8a2222; font-weight: 600; }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pill-focus { background: #e8f4f5; color: var(--teal); border: 1px solid #9ecfd1; }
+  .pill-valid { background: var(--green-light); color: var(--green); border: 1px solid #9dd0b4; }
+  .pill-backup { background: var(--sky-light); color: var(--sky); border: 1px solid #a4b8e0; }
+
+  /* ── TIPS ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  @media (max-width: 700px) { .tips-grid { grid-template-columns: 1fr; } }
+  .tip-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .tip-card h4 {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tip-card p, .tip-card ul {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .tip-card ul { padding-left: 16px; }
+  .tip-card li { margin-bottom: 4px; }
+  .tip-icon { font-size: 16px; }
+
+  footer {
+    background: var(--ink);
+    color: #666;
+    text-align: center;
+    padding: 20px;
+    font-size: 11.5px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">University Application Guide · Class of 2027</div>
+  <h1>Panduan Aplikasi <span>Universitasmu</span></h1>
+  <div class="header-sub">
+    Dibuat khusus untuk <strong>Anakya Danke Cetta Akhbar</strong> — aspiring Data Scientist dari MAN Insan Cendekia Sumedang. Mencakup semua universitas top dunia yang relevan dengan target SAT 1550 &amp; IELTS 8.5, dengan fokus Data Science, Computer Science &amp; Statistics.
+  </div>
+</div>
+
+<!-- PROFILE BAND -->
+<div class="profile-band">
+  <div class="profile-item">
+    <div class="profile-label">Target Scores</div>
+    <div class="profile-value">SAT 1550 &nbsp;·&nbsp; IELTS 8.5</div>
+  </div>
+  <div class="profile-item">
+    <div class="profile-label">Kualifikasi</div>
+    <div class="profile-value">Ijazah SMA / MA (lulus 2027)</div>
+  </div>
+  <div class="profile-item">
+    <div class="profile-label">Bidang Fokus</div>
+    <div class="profile-value">Data Science · Computer Science · Statistics</div>
+  </div>
+  <div class="profile-item">
+    <div class="profile-label">Profil Kekuatan</div>
+    <div>
+      <span class="badge badge-gold">Top 1.6% Parlemen Remaja</span>
+      <span class="badge badge-teal">Grand Champion UI</span>
+      <span class="badge badge-sky">Samsung SIC Finalist</span>
+      <span class="badge badge-green">HundrED Youth Committee</span>
+      <span class="badge badge-rose">AFS Full Scholarship</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showSection('overview')">Overview & Strategi</div>
+  <div class="nav-tab" onclick="showSection('usa')">🇺🇸 Amerika Serikat</div>
+  <div class="nav-tab" onclick="showSection('australia')">🇦🇺 Australia</div>
+  <div class="nav-tab" onclick="showSection('uk')">🇬🇧 UK</div>
+  <div class="nav-tab" onclick="showSection('singapore')">🇸🇬 Singapore</div>
+  <div class="nav-tab" onclick="showSection('others')">🌍 Negara Lain</div>
+  <div class="nav-tab" onclick="showSection('garuda')">🦅 Beasiswa Garuda</div>
+  <div class="nav-tab" onclick="showSection('timeline')">📅 Timeline</div>
+  <div class="nav-tab" onclick="showSection('assessment')">📊 Assessment</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- OVERVIEW -->
+<div id="overview" class="section active">
+  <div class="section-header">
+    <h2>Overview & Strategi</h2>
+    <p>Memahami posisimu dan cara terbaik menyusun daftar universitas</p>
+  </div>
+
+  <div class="infobox infobox-gold">
+    <div class="infobox-title">💡 Profil Akademik Anakya — Sangat Kuat untuk Standar Internasional</div>
+    <p>Dengan CV yang sudah kamu miliki — Top 1.6% seleksi nasional parlemen, Grand Champion di Universitas Indonesia, runner-up dan finalis di 20+ kompetisi internasional, plus program pertukaran AFS full scholarship — profilmu sudah berada di level yang kompetitif untuk universitas-universitas top. Kamu tinggal melengkapi dengan SAT + IELTS target dan LoA.</p>
+  </div>
+
+  <div class="infobox infobox-teal">
+    <div class="infobox-title">📌 Tentang A-Level — Kabar Baiknya</div>
+    <p>Semua universitas di panduan ini <strong>menerima Ijazah SMA/MA Indonesia secara langsung</strong> — tidak ada yang mensyaratkan A-Level. Universitas di AS, Australia, dan Singapore secara eksplisit menerima Ijazah SMA dengan nilai rapor. Untuk UK: Imperial College, UCL, Manchester, dan Edinburgh menerima Ijazah SMA namun biasanya mensyaratkan nilai rapor yang sangat tinggi (90+) atau kadang foundation year. <em>Imperial adalah pengecualian paling ketat di UK</em> — mereka sangat menyarankan A-Level atau IB, tapi ada jalur via foundation.</p>
+  </div>
+
+  <div class="infobox infobox-sky">
+    <div class="infobox-title">🎯 Strategi Daftar Universitas</div>
+    <ul>
+      <li><strong>FOKUS UTAMA (4–5 uni):</strong> Uni yang paling sesuai passion + realistis diterima + kemungkinan dapat beasiswa penuh (Garuda atau uni sendiri)</li>
+      <li><strong>REACH (2–3 uni):</strong> MIT, CMU — sangat selektif tapi worth trying karena profilmu sudah kuat</li>
+      <li><strong>VALIDASI / BACK-UP (3–5 uni):</strong> Uni yang acceptance rate-nya lebih tinggi, tapi tetap QS Top 100 by subject — daftar untuk pastikan ada LoA untuk Beasiswa Garuda</li>
+    </ul>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:18px; margin:28px 0 12px;">Jurusan yang Direkomendasikan</h3>
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>Jurusan</th>
+        <th>Relevansi ke Data Scientist</th>
+        <th>Rekomendasi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Computer Science (CS)</strong></td>
+        <td>Sangat tinggi — coding, algoritma, AI/ML, data structures</td>
+        <td>⭐ Pilihan utama, paling luas kesempatannya</td>
+      </tr>
+      <tr>
+        <td><strong>Data Science / Data Science & AI</strong></td>
+        <td>Langsung ke target karir</td>
+        <td>⭐ Pilihan utama bila tersedia S1-nya</td>
+      </tr>
+      <tr>
+        <td><strong>Statistics / Statistics with Data Science</strong></td>
+        <td>Fondasi matematika yang solid untuk DS</td>
+        <td>✅ Sangat baik, sering lebih mudah masuk dari CS</td>
+      </tr>
+      <tr>
+        <td><strong>Mathematics & Computer Science</strong></td>
+        <td>Dual foundation yang kuat</td>
+        <td>✅ Baik bila tersedia</td>
+      </tr>
+      <tr>
+        <td><strong>Information Systems / Business Analytics</strong></td>
+        <td>Lebih applied, less theoretical</td>
+        <td>🟡 Opsi jika CS terlalu kompetitif</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4><span class="tip-icon">🏅</span> Honours Degree — Penting!</h4>
+      <p>Untuk karir data science serius (PhD, research, senior roles), <strong>Honours degree sangat direkomendasikan</strong>. Australia umumnya punya 3 tahun biasa + 1 tahun Honours opsional (4th year). UK umumnya sudah otomatis honours (BSc Hons). Singapore NUS/NTU punya honours track. AS: gelarnya BS saja, tapi banyak research opportunities.</p>
+    </div>
+    <div class="tip-card">
+      <h4><span class="tip-icon">💰</span> Kombinasi Beasiswa</h4>
+      <p>Strategi terbaik: <strong>(1) Dapat LoA dulu</strong> dari universitas, <strong>(2) Daftar Beasiswa Garuda</strong> dengan LoA tersebut. Beberapa uni (NUS, NTU) juga punya beasiswa sendiri yang bisa dikombinasikan. Untuk AS: MIT dan beberapa ivy perlu need-based financial aid application terpisah.</p>
+    </div>
+    <div class="tip-card">
+      <h4><span class="tip-icon">📝</span> Personal Statement</h4>
+      <p>CV-mu sangat powerful. Tonjolkan: <strong>SEEHUY Smart Eyewear</strong> (social impact tech), <strong>CETTA AI Study Companion</strong> (self-built AI tool), <strong>MILESTONE mobility framework</strong> (HKI + book chapter), dan narrative sebagai "data scientist untuk Indonesia".</p>
+    </div>
+    <div class="tip-card">
+      <h4><span class="tip-icon">🌐</span> NYU vs MIT</h4>
+      <p><strong>NYU Courant (Math) atau NYU Stern (DS)</strong>: acceptance rate 8–12%, lebih realistis, ada di New York yang kamu impikan. <strong>MIT</strong>: acceptance rate &lt;4% untuk international, sangat reach, tapi profil kamu cukup kuat untuk reach. Daftar keduanya.</p>
+    </div>
+  </div>
+</div>
+
+<!-- USA -->
+<div id="usa" class="section">
+  <div class="section-header">
+    <h2>🇺🇸 Amerika Serikat</h2>
+    <p>Aplikasi via Common App / Coalition App · Deadline: Early Decision Nov, Regular Jan</p>
+  </div>
+
+  <div class="infobox infobox-gold">
+    <div class="infobox-title">Tentang Ijazah SMA di AS</div>
+    <p>Semua universitas AS di bawah ini menerima Ijazah SMA Indonesia. Kamu perlu submit: ijazah (diterjemahkan resmi), transkrip rapor, SAT/ACT, IELTS/TOEFL, essays, dan rekomendasi. Nilai rapor yang ideal: rata-rata 90+/100 atau nilai ujian sekolah yang tinggi.</p>
+  </div>
+
+  <div class="uni-grid">
+
+    <!-- MIT -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>Massachusetts Institute of Technology (MIT)</h3>
+          <div class="uni-subtitle">Cambridge, Massachusetts · QS #1 CS & Data Science · THE #2 World</div>
+          <div>
+            <span class="badge badge-gold">REACH</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-sky">Need-Blind Intl</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-reach">~3–4%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BS in Computer Science & Engineering
+            <span class="small">MIT EECS — kelas dunia untuk CS, AI, ML</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">SAT (req'd) · IELTS min. 7.0 (kompetitif: 8+)
+            <span class="small">Ijazah SMA diterima. Tidak ada A-Level requirement.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~$64,300 tuition
+            <span class="small">+ ~$21,000 living. Total ~$85K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa / Aid</div>
+          <div class="uni-field-value">Need-blind + meets 100% demonstrated need
+            <span class="small">Tidak ada merit scholarship. Average grant ~$57K/yr. Daftar Beasiswa Garuda via LoA MIT.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://apply.mit.edu" target="_blank">apply.mit.edu</a>
+            <span class="small">MyMIT portal, bukan Common App</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">$75 USD
+            <span class="small">Fee waiver tersedia untuk financial hardship</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline (Class 2027)</div>
+          <div class="uni-field-value">EA: 1 Nov 2026 / Regular: 1 Jan 2027
+            <span class="small">MIT tidak punya ED binding. EA non-restrictive.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">BS degree (4 tahun), bukan honours format
+            <span class="small">Tapi ada SB thesis track + UROP research yang setara</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">SAT 1550 + IELTS 8.5 memenuhi threshold
+            <span class="small">CV sangat kuat. Acceptance rate intl. ~2%. Worth applying.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>Tips:</strong> Esai MIT sangat spesifik — ceritakan CETTA project atau SEEHUY dan hubungkannya dengan "mengapa MIT". Emphasize impact sosial dan inovasi teknologi Indonesia.</div>
+    </div>
+
+    <!-- NYU -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">2</div>
+        <div class="uni-card-title">
+          <h3>New York University (NYU)</h3>
+          <div class="uni-subtitle">New York City · QS #17 CS · THE #49 World</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-rose">Kota Impian!</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-reach">~9–12%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BS Computer Science (Tandon, Engineering) atau B.A. CS & Data Science (Courant/CAS)
+            <span class="small">NYU Tandon juga punya Data Science major</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">SAT 1520+ kompetitif · IELTS 7.5+
+            <span class="small">Ijazah SMA diterima langsung. Test-flexible (SAT/ACT/AP/IB).</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~$62,800 tuition
+            <span class="small">+ ~$20,000 living NYC. Total ~$83K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa / Aid</div>
+          <div class="uni-field-value">Merit scholarship tersedia (selective)
+            <span class="small">Beasiswa Garuda bisa cover tuition full. NYU juga punya need-based aid utk intl.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://commonapp.org" target="_blank">Common App</a>
+            <span class="small">+ NYU supplement essays</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">$80 USD (UG)
+            <span class="small">Fee waiver tersedia</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">ED I: 1 Nov · ED II: 1 Jan · RD: 5 Jan 2027
+            <span class="small">ED acceptance rate ~13–15% (lebih tinggi)</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">BS/BA degree · Macaulay Honors College
+            <span class="small">Macaulay = full scholarship + honours, sangat selektif</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Sangat realistis dengan SAT 1550 + portfolio
+            <span class="small">NYU sangat menghargai diverse applicants + social impact</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>Tips:</strong> NYU supplement essay penting banget — "Why NYU?" harus spesifik (sebutkan lab/profesor tertentu, NYC tech ecosystem). ED I meningkatkan peluang signifikan.</div>
+    </div>
+
+    <!-- Carnegie Mellon -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">3</div>
+        <div class="uni-card-title">
+          <h3>Carnegie Mellon University (CMU)</h3>
+          <div class="uni-subtitle">Pittsburgh, PA · QS #3 CS · #1 CS School di AS menurut banyak ranking</div>
+          <div>
+            <span class="badge badge-gold">REACH</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-reach">~11%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BS Computer Science (SCS) atau BS in Statistics & Machine Learning
+            <span class="small">CMU Statistics & ML = satu-satunya program seperti ini di AS</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">SAT req'd · IELTS min. 7.5
+            <span class="small">Test optional untuk domestic, tapi SAT sangat disarankan untuk intl.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~$63,000 tuition
+            <span class="small">+ ~$18,000 living. Total ~$81K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa / Aid</div>
+          <div class="uni-field-value">Need-based aid untuk intl (terbatas)
+            <span class="small">Beasiswa Garuda adalah jalur terbaik untuk cover biaya. CMU tidak need-blind untuk intl.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://admission.enrollment.cmu.edu" target="_blank">Common App</a>
+            <span class="small">+ CMU-specific essays per school</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">$75 USD
+            <span class="small">Fee waiver tersedia</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">ED: 1 Nov · RD: 1 Jan 2027</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">BS/BSc (4 tahun), ada honors track
+            <span class="small">Additional Hons thesis optional</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Reach, tapi worth trying
+            <span class="small">CS SCS sangat kompetitif. Statistics & ML lebih achievable.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>Tips:</strong> Apply ke Statistics & Machine Learning daripada CS SCS — sama prestisiusnya, tapi slightly less competitive. Sangat relevan untuk data scientist.</div>
+    </div>
+
+    <!-- UC Berkeley -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">4</div>
+        <div class="uni-card-title">
+          <h3>UC Berkeley</h3>
+          <div class="uni-subtitle">Berkeley, California · QS #4 CS · Public Ivy</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-reach">~11–14%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BS Electrical Engineering & Computer Science (EECS) atau BS Data Science
+            <span class="small">Berkeley punya jurusan Data Science tersendiri — sangat relevan!</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">SAT/ACT · TOEFL min. 80 atau IELTS min. 6.5
+            <span class="small">Ijazah SMA Indonesia diterima via UC International Application</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~$44,000 tuition (international)
+            <span class="small">+ ~$23,000 living. Total ~$67K/yr — lebih terjangkau</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa / Aid</div>
+          <div class="uni-field-value">Need-based & beberapa merit scholarships
+            <span class="small">Beasiswa Garuda bisa cover. Berkeley juga punya Global Pathways program.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://admission.universityofcalifornia.edu" target="_blank">UC Application</a>
+            <span class="small">Bukan Common App — sistem tersendiri. Deadline: 30 Nov 2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">$80 USD (intl)
+            <span class="small">Fee waiver tersedia</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">Hanya ada Regular: 30 Nov 2026
+            <span class="small">UC tidak punya ED/EA</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">BS (4 tahun), Honours thesis optional</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Realistis dengan SAT 1550 + profile kuat
+            <span class="small">EECS lebih kompetitif. Data Science program sedikit lebih accessible.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>Tips:</strong> UC Application punya Personal Insight Questions (PIQ) — 8 pertanyaan, pilih 4. Fokus pada cerita impact sosial dan proyek inovasimu.</div>
+    </div>
+
+    <!-- University of Michigan -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">5</div>
+        <div class="uni-card-title">
+          <h3>University of Michigan — Ann Arbor</h3>
+          <div class="uni-subtitle">Ann Arbor, MI · QS Top 30 CS · Strong Data Science</div>
+          <div>
+            <span class="badge badge-sky">MATCH / FOKUS</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~17–20%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BS Computer Science · BS Data Science (LSAS/CoE)
+            <span class="small">Juga ada Statistics & Data Science major</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">SAT/ACT · TOEFL 100+ atau IELTS 6.5+
+            <span class="small">Ijazah SMA diterima. Rapor kuat sangat penting.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~$55,000 tuition (intl)
+            <span class="small">+ ~$15,000 living. Total ~$70K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://apply.umich.edu" target="_blank">apply.umich.edu</a>
+            <span class="small">Common App + UMich supplement</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">EA: 1 Nov · RD: 1 Feb 2027</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">$75 USD</div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 UMich sangat menghargai leadership dan community impact — perfect match dengan profilmu di parlemen dan OSIS.</div>
+    </div>
+
+  </div><!-- /uni-grid -->
+</div>
+
+<!-- AUSTRALIA -->
+<div id="australia" class="section">
+  <div class="section-header">
+    <h2>🇦🇺 Australia</h2>
+    <p>Pilihan favorit orangtua + QS Top 100 + beasiswa uni yang kuat untuk Indonesia</p>
+  </div>
+
+  <div class="infobox infobox-green">
+    <div class="infobox-title">💡 Keunggulan Australia untuk Kamu</div>
+    <ul>
+      <li>Menerima Ijazah SMA Indonesia secara langsung di semua Group of Eight (Go8) universities</li>
+      <li>Banyak beasiswa partial-full dari universitas sendiri untuk mahasiswa Indonesia</li>
+      <li>Dekat dengan Indonesia, biaya hidup lebih terjangkau dari AS/UK</li>
+      <li>Programme Honours (4th year) tersedia dan sangat direkomendasikan untuk data science</li>
+    </ul>
+  </div>
+
+  <div class="uni-grid">
+
+    <!-- ANU -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>Australian National University (ANU)</h3>
+          <div class="uni-subtitle">Canberra · QS #30 World · QS Top 50 CS</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">ANU Global Merit Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~35–45%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">Bachelor of Advanced Computing (Honours) — 4 tahun
+            <span class="small">Program terbaik di ANU untuk CS. Honours otomatis terintegrasi!</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA + rapor kuat · IELTS 6.5 overall (7.0 recommended)
+            <span class="small">Nilai matematika harus kuat. Tidak perlu A-Level.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~AUD $47,000 (~$31,000 USD) tuition
+            <span class="small">+ AUD ~$20,000 living. Total ~AUD $67K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">ANU International Excellence Scholarship (25–50% fee reduction)
+            <span class="small">Otomatis dipertimbangkan saat apply. Beasiswa Garuda bisa full cover.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.anu.edu.au/study/apply" target="_blank">anu.edu.au/study/apply</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">Sem 1 2027: 31 Okt 2026
+            <span class="small">Apply early untuk beasiswa consideration</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ Ya — Bachelor of Advanced Computing (Hons)
+            <span class="small">Honours terintegrasi dalam 4 tahun</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">Gratis (no application fee)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Sangat tinggi — IELTS 8.5 jauh di atas minimum
+            <span class="small">Profile kamu sangat kuat untuk ANU. Kemungkinan dapat merit scholarship.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>ANU Chancellor's International Scholarship</strong> juga tersedia — cover tuition penuh untuk penerima terpilih. Apply early untuk dipertimbangkan otomatis.</div>
+    </div>
+
+    <!-- University of Melbourne -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">2</div>
+        <div class="uni-card-title">
+          <h3>University of Melbourne</h3>
+          <div class="uni-subtitle">Melbourne · QS #13 World · THE #34 World</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">Melbourne Intl UG Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~40–50%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">Bachelor of Science (Computing & Software Systems) atau B.Sc (Data Science)
+            <span class="small">Lanjut ke Honours year (1 tahun) = BSc Honours</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA + rapor rata-rata 85+ · IELTS 6.5 overall, 6.0 tiap komponen
+            <span class="small">Indonesia termasuk negara eligible untuk Melbourne Intl Scholarship</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~AUD $49,000 tuition
+            <span class="small">+ AUD ~$22,000 living. Total ~AUD $71K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">Melbourne International Undergraduate Scholarship (20–25% fee waiver)
+            <span class="small">Indonesia eligible. Auto-considered saat apply sebelum 31 Okt 2026. Dari 2027 = 20% fee reduction.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://study.unimelb.edu.au/how-to-apply" target="_blank">study.unimelb.edu.au</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">Sem 1 2027: 31 Okt 2026
+            <span class="small">Deadline beasiswa = sama dengan deadline apply</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ BSc Honours (tahun ke-4 opsional)
+            <span class="small">Sangat direkomendasikan untuk research/PhD pathway</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">AUD $100</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Sangat tinggi — profil sangat kuat
+            <span class="small">IELTS 8.5 >> requirement. Leadership = nilai plus besar.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 <strong>Melbourne Chancellor's Scholarship</strong> = award paling bergengsi untuk school leavers internasional di Melbourne. Cek eligibility juga.</div>
+    </div>
+
+    <!-- UNSW -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">3</div>
+        <div class="uni-card-title">
+          <h3>UNSW Sydney</h3>
+          <div class="uni-subtitle">Sydney · QS #19 World · QS #16 CS</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">Scientia Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~45–55%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">Bachelor of Computer Science (Honours) atau Bachelor of Data Science & Decisions
+            <span class="small">UNSW punya jurusan Data Science & Decisions yang spesifik!</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA Indonesia diterima · IELTS 6.5 overall
+            <span class="small">Cek "International Direct Entry" scores di website UNSW per program</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~AUD $48,000 tuition
+            <span class="small">+ AUD ~$22,000 living Sydney</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">International Scientia Coursework Scholarship (prestigious, 20% fee)
+            <span class="small">+ UNSW Global 20% tuition contribution (untuk intl students 2026–2027)</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.unsw.edu.au/study/how-to-apply" target="_blank">unsw.edu.au/apply</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">Rolling admissions untuk 2027 (Term 1 Feb)
+            <span class="small">Apply as early as possible — Oct/Nov 2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ BSc Computer Science Honours
+            <span class="small">Honours terintegrasi atau tahun ke-4 terpisah</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">Gratis</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Sangat tinggi — UNSW cocok untuk profile kamu
+            <span class="small">Scholarship Scientia menilai leadership, extracurricular — kamu sangat kuat di sini</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 UNSW Scientia Scholarship menilai "potential to be a future leader" — narrative parliament + HundrED + SEEHUY sangat powerful.</div>
+    </div>
+
+    <!-- Monash -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">4</div>
+        <div class="uni-card-title">
+          <h3>Monash University</h3>
+          <div class="uni-subtitle">Melbourne · QS #37 World · QS Top 50 CS</div>
+          <div>
+            <span class="badge badge-green">BACK-UP KUAT</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-likely">~60–70%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">Bachelor of Computer Science (Honours) atau B.Sc Data Science
+            <span class="small">Monash punya spesialisasi AI dan Data Science yang kuat</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA diterima · IELTS 6.0 (tiap komponen min 5.5)
+            <span class="small">Entry requirements lebih accessible dari ANU/Melbourne</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~AUD $42,000 tuition
+            <span class="small">Lebih terjangkau dari Melbourne/UNSW</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">Monash International Merit Scholarship (up to 50% fee waiver)
+            <span class="small">Competitive, based on academic merit</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.monash.edu/study/how-to-apply" target="_blank">monash.edu/apply</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">Sem 1 2027: Nov 2026
+            <span class="small">Rolling offers</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ Honours degree terintegrasi</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">Gratis</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- UK -->
+<div id="uk" class="section">
+  <div class="section-header">
+    <h2>🇬🇧 United Kingdom</h2>
+    <p>Aplikasi via UCAS · Deadline: 29 Januari 2027 (equal consideration deadline) · Max 5 pilihan</p>
+  </div>
+
+  <div class="infobox infobox-rose">
+    <div class="infobox-title">⚠️ Penting tentang UK & Ijazah SMA</div>
+    <p>Mayoritas universitas UK secara formal mensyaratkan A-Levels atau IB. <strong>Tapi ada pengecualian dan jalur alternatif:</strong></p>
+    <ul>
+      <li><strong>Manchester, Leeds, Sheffield, Edinburgh:</strong> Menerima Ijazah SMA dengan nilai tinggi (seringkali dengan nilai rapor rata-rata 85–90+). Cek halaman "country-specific requirements" di website masing-masing.</li>
+      <li><strong>Imperial College & UCL:</strong> Sangat direkomendasikan A-Level/IB. Ada jalur via Foundation Year (1 tahun tambahan) yang diakui.</li>
+      <li><strong>Oxford & Cambridge:</strong> Hampir pasti butuh A-Level/IB — <em>tidak dimasukkan di panduan ini.</em></li>
+    </ul>
+    <p>Untuk UK, <strong>Manchester dan Edinburgh adalah pilihan paling realistis langsung dari SMA Indonesia.</strong></p>
+  </div>
+
+  <div class="uni-grid">
+
+    <!-- Manchester -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>University of Manchester</h3>
+          <div class="uni-subtitle">Manchester · QS #34 World · QS #28 CS</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA (UK)</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">Global Futures Scholarship SEA</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~33–40%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science (Hons) atau BSc Data Science (Hons)
+            <span class="small">3 tahun, Honours otomatis. Manchester punya dedicated Data Science program.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA + nilai tinggi (avg 85+) · IELTS 6.5 overall, min 6.0 tiap komponen
+            <span class="small">Manchester secara eksplisit menerima Indonesian SMA students</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~£31,500 tuition (intl)
+            <span class="small">+ ~£14,000 living Manchester. Total ~£45,500/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">Global Futures Scholarship South East Asia: £10,000/yr x 3 = £30,000 total
+            <span class="small">Indonesia eligible! Open untuk offer holders. Otomatis setelah ada offer. Apply sebelum deadline.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.ucas.com" target="_blank">UCAS</a>
+            <span class="small">ucas.com — daftar akun, pilih Manchester sbg salah satu dari 5 pilihan</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">29 Jan 2027 (UCAS equal consideration)
+            <span class="small">Apply earlier = better (Nov/Dec 2026 ideal)</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ BSc (Hons) — Honours otomatis UK</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">£28.50 (UCAS, untuk semua 5 pilihan)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Tinggi — IELTS 8.5 jauh di atas minimum
+            <span class="small">£30,000 scholarship + Beasiswa Garuda = bisa fully funded</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 Manchester Global Futures SEA Scholarship adalah salah satu yang paling accessible untuk Indonesia. Kamu sangat likely qualify.</div>
+    </div>
+
+    <!-- Edinburgh -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">2</div>
+        <div class="uni-card-title">
+          <h3>University of Edinburgh</h3>
+          <div class="uni-subtitle">Edinburgh · QS #22 World · QS #21 CS</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA (UK)</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~35–45%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science (Hons) atau BSc Artificial Intelligence
+            <span class="small">4 tahun di Scotland (integrated Hons). Kota yang indah dan aman.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA diterima dengan nilai tinggi · IELTS 6.5 overall (7.0 untuk CS)
+            <span class="small">Edinburgh secara resmi menerima Indonesian qualifications. Cek country page.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~£32,000 tuition (intl)
+            <span class="small">+ ~£13,000 living Edinburgh</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">Edinburgh Global Undergraduate Scholarship (partial)
+            <span class="small">+ Beasiswa Garuda untuk full coverage</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.ucas.com" target="_blank">UCAS</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">29 Jan 2027 (UCAS)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ Integrated Master's / BSc Hons (4 tahun)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imperial College Foundation -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">3</div>
+        <div class="uni-card-title">
+          <h3>Imperial College London ⚠️</h3>
+          <div class="uni-subtitle">London · QS #2 World · QS #2 CS</div>
+          <div>
+            <span class="badge badge-gold">REACH (perlu Foundation)</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓ (jika masuk)</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-reach">~14%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BEng/MEng Computing atau BSc Mathematics & Computer Science
+            <span class="small">Juga ada BSc Applied Mathematics & Computation</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">⚠️ A-Levels / IB SANGAT diutamakan. Ijazah SMA bisa via Foundation Year dulu.
+            <span class="small">Jalur: UCL UPCSE (Foundation, 1 tahun) → masuk Imperial. IELTS 7.0 min.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~£45,400 tuition (2026 rate, intl)
+            <span class="small">London = kota paling mahal di UK. Living ~£16,000/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Rekomendasi</div>
+          <div class="uni-field-value">Pertimbangkan hanya jika sangat ingin UK + London
+            <span class="small">Manchester atau Edinburgh lebih accessible dan tetap QS Top 40</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">⚠️ Imperial hampir pasti butuh Foundation Year untuk lulusan SMA Indonesia. Ini artinya 4+1 = 5 tahun total, dan biaya lebih besar. Hanya masukkan jika London adalah prioritas mutlak.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SINGAPORE -->
+<div id="singapore" class="section">
+  <div class="section-header">
+    <h2>🇸🇬 Singapore</h2>
+    <p>Paling dekat dengan Indonesia · Ijazah SMA diterima · Beasiswa sangat kompetitif</p>
+  </div>
+
+  <div class="infobox infobox-teal">
+    <div class="infobox-title">💡 Singapore — Ideal untuk Ijazah SMA Indonesia</div>
+    <p>NUS dan NTU secara eksplisit memiliki panduan penerimaan untuk siswa Indonesia dengan Ijazah SMA. Nilai rapor rata-rata 85+ sangat penting. Keduanya masuk QS Top 30 World dan Top 20 CS — sangat kuat untuk Beasiswa Garuda.</p>
+  </div>
+
+  <div class="uni-grid">
+
+    <!-- NUS -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>National University of Singapore (NUS)</h3>
+          <div class="uni-subtitle">Singapore · QS #8 World · QS #4 CS & Data Science</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">Science & Technology UG Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~20–30%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science atau BSc Data Science & Analytics (Business Analytics)
+            <span class="small">Juga ada: BSc Information Security · Double Major tersedia</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA (rapor min 85 di semua mata pelajaran utama) · IELTS min 6.0
+            <span class="small">NUS punya panduan khusus untuk Indonesian SMA applicants. Cek nus.edu.sg</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~SGD $37,550 (~$28,000 USD) tuition (intl, setelah subsidi)
+            <span class="small">+ SGD ~$15,000 living. Total ~SGD $52K/yr</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">NUS Science & Technology Undergraduate Scholarship
+            <span class="small">Covers tuition + SGD $6,000/yr living + SGD $2,000 enrollment allowance + 1-way airfare. Untuk Asian students (non-SG) termasuk Indonesia. Otomatis dipertimbangkan.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.nus.edu.sg/oam" target="_blank">nus.edu.sg/oam</a>
+            <span class="small">Online application — bukan UCAS. Bisa apply utk hingga 8 kursus.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">AY 2027/28 (intake Aug 2027): ~Feb–Mar 2027
+            <span class="small">Cek kalender NUS untuk tanggal pasti</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ BSc (Hons) / BSc CS dengan Honours track
+            <span class="small">Honours terintegrasi (4 tahun) atau standard 3 tahun</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">SGD $10 (~$7.5 USD)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Potensi Anakya</div>
+          <div class="uni-field-value">Tinggi — tapi kompetitif (banyak Indonesian student top apply)
+            <span class="small">Leadership profile sangat membantu. Garuda + NUS S&T Scholarship = near-full coverage.</span>
+          </div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 NUS secara eksplisit menyebutkan Beasiswa Garuda di halaman Indonesian applicants mereka. Ini signal kuat bahwa LoA NUS diterima untuk Garuda.</div>
+    </div>
+
+    <!-- NTU -->
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">2</div>
+        <div class="uni-card-title">
+          <h3>Nanyang Technological University (NTU)</h3>
+          <div class="uni-subtitle">Singapore · QS #15 World · QS #15 CS</div>
+          <div>
+            <span class="badge badge-sky">FOKUS UTAMA</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">ASEAN UG Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~20–30%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science atau BSc Data Science & Artificial Intelligence
+            <span class="small">NTU punya program DS & AI yang dedicated — sangat relevan</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA (min 85 di semua subj utama) · IELTS 6.0 overall min
+            <span class="small">NTU punya halaman spesifik "Indonesian Ijazah SMA" di website mereka</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~SGD $36,000 tuition (intl, setelah subsidi)
+            <span class="small">+ SGD ~$14,000 living</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa Universitas</div>
+          <div class="uni-field-value">ASEAN Undergraduate Scholarship (untuk ASEAN citizens termasuk Indo)
+            <span class="small">Covers tuition + living allowance + airfare. Sangat kompetitif.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.ntu.edu.sg/admissions/undergraduate" target="_blank">ntu.edu.sg/admissions</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">~Feb–Mar 2027 untuk AY 2027/28</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ BSc (Hons) track tersedia</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Fee</div>
+          <div class="uni-field-value">SGD $10</div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 NTU juga menyebut Beasiswa Garuda secara eksplisit di halaman Indonesian SMA applicants. Kombinasi NTU ASEAN Scholarship + Garuda bisa fully funded.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OTHERS -->
+<div id="others" class="section">
+  <div class="section-header">
+    <h2>🌍 Negara Lain — Opsional tapi Worth Considering</h2>
+    <p>Uni-uni ini bisa menjadi tambahan atau alternatif dengan full government scholarship</p>
+  </div>
+
+  <div class="category-divider">
+    <span class="cat-label">🇨🇦 Kanada</span>
+    <div class="cat-line"></div>
+  </div>
+
+  <div class="uni-grid">
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>University of Toronto</h3>
+          <div class="uni-subtitle">Toronto · QS #25 World · QS Top 20 CS</div>
+          <div>
+            <span class="badge badge-sky">MATCH</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~40–45%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science (Hons) atau BSc Statistics
+            <span class="small">UofT St. George campus, bukan Mississauga/Scarborough</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA diterima · IELTS 6.5 overall, min 6.0 tiap komponen
+            <span class="small">Nilai rapor sangat diperhitungkan. Target 85+.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~CAD $58,000 (~$43,000 USD) tuition (intl)
+            <span class="small">+ CAD ~$15,000 living</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa</div>
+          <div class="uni-field-value">Lester B. Pearson International Scholarship (full scholarship!)
+            <span class="small">Covers tuition + living 4 tahun. Sangat kompetitif, nominee dari sekolah. Deadline: Des 2026.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.ouac.on.ca" target="_blank">ouac.on.ca</a> (Ontario Universities Application Centre)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">~Jan 2027 (vary per program)</div>
+        </div>
+        <div>
+          <div class="uni-field-label">Honours?</div>
+          <div class="uni-field-value">✅ Honours BSc (4 tahun) — standar Kanada</div>
+        </div>
+      </div>
+      <div class="uni-card-footer">💡 Lester B. Pearson Scholarship = salah satu beasiswa paling bergengsi di Kanada. Fully funded. Nominasi dari sekolah. Tanya ke sekolahmu apakah MAN IC Sumedang bisa nominate.</div>
+    </div>
+  </div>
+
+  <div class="category-divider">
+    <span class="cat-label">🇳🇱 Belanda (Netherlands)</span>
+    <div class="cat-line"></div>
+  </div>
+
+  <div class="infobox infobox-sky">
+    <div class="infobox-title">Belanda — Hidden Gem untuk Data Science</div>
+    <p>TU Delft dan University of Amsterdam masuk QS Top 100 CS. Kuliah bahasa Inggris. Biaya tuition lebih murah dari AS/UK. Pemerintah Belanda punya <strong>Holland Scholarship</strong> untuk mahasiswa Indonesia (non-EEA). Ijazah SMA Indonesia diterima.</p>
+  </div>
+
+  <div class="uni-grid">
+    <div class="uni-card">
+      <div class="uni-card-header">
+        <div class="uni-rank-badge">1</div>
+        <div class="uni-card-title">
+          <h3>Delft University of Technology (TU Delft)</h3>
+          <div class="uni-subtitle">Delft, Netherlands · QS #57 World · QS Top 50 CS</div>
+          <div>
+            <span class="badge badge-sky">ALTERNATIF MENARIK</span>
+            <span class="badge badge-teal">Beasiswa Garuda ✓</span>
+            <span class="badge badge-gold">Holland Scholarship</span>
+          </div>
+        </div>
+        <div class="uni-accept-rate">
+          <span class="rate-label">Acceptance</span>
+          <span class="rate-value rate-match">~50–60%</span>
+        </div>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-field-label">Program Rekomendasi</div>
+          <div class="uni-field-value">BSc Computer Science & Engineering atau BSc Applied Mathematics
+            <span class="small">Semua program S1 disampaikan dalam bahasa Inggris</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Persyaratan Masuk</div>
+          <div class="uni-field-value">Ijazah SMA diterima · IELTS 6.5 overall
+            <span class="small">Beberapa program butuh colloquium (entrance test matematika). Cek per program.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Biaya / Tahun</div>
+          <div class="uni-field-value">~€18,000–€22,000 (~$20,000–$24,000 USD) tuition (intl)
+            <span class="small">Jauh lebih murah dari AS/UK/Australia!</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Beasiswa</div>
+          <div class="uni-field-value">Holland Scholarship (€5,000 satu kali, dari pemerintah Belanda)
+            <span class="small">+ TU Delft Excellence Scholarship (full tuition + €10K/yr living). Sangat kompetitif.</span>
+          </div>
+        </div>
+        <div>
+          <div class="uni-field-label">Application Portal</div>
+          <div class="uni-field-value"><a href="https://www.tudelft.nl/onderwijs/toelating" target="_blank">tudelft.nl/toelating</a></div>
+        </div>
+        <div>
+          <div class="uni-field-label">Deadline</div>
+          <div class="uni-field-value">1 Mei 2027 (untuk intake Sept 2027)
+            <span class="small">Jauh lebih late dari US/UK deadline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GARUDA -->
+<div id="garuda" class="section">
+  <div class="section-header">
+    <h2>🦅 Beasiswa Garuda — Panduan Lengkap</h2>
+    <p>Beasiswa S1 fully funded dari Kemdiktisaintek + LPDP untuk siswa kelas 12 berprestasi</p>
+  </div>
+
+  <div class="infobox infobox-gold">
+    <div class="infobox-title">🌟 Status: GELOMBANG 2 SEDANG BUKA (25 Mei – 25 Juni 2026)</div>
+    <p>Kamu masih bisa daftar sekarang untuk gelombang 2! Tapi untuk 2027 entry (kamu lulus 2027), kemungkinan akan ada Gelombang baru di 2027. Yang perlu kamu siapkan dari sekarang adalah LoA dan kelengkapan dokumen.</p>
+  </div>
+
+  <div class="garuda-card">
+    <h3>📋 Persyaratan Beasiswa Garuda 2026</h3>
+    <table class="info-table">
+      <thead><tr><th>Syarat</th><th>Detail</th><th>Status Anakya</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>WNI Kelas 12</strong></td>
+          <td>Siswa aktif kelas 12 SMA/SMK/MA tahun ajaran 2025/2026</td>
+          <td>✅ Terpenuhi (MAN IC Sumedang)</td>
+        </tr>
+        <tr>
+          <td><strong>SNBP Eligible</strong></td>
+          <td>Masuk kuota eligible SNBP di sekolah masing-masing</td>
+          <td>⚠️ Konfirmasi ke sekolah</td>
+        </tr>
+        <tr>
+          <td><strong>Nilai Rapor Avg ≥ 85</strong></td>
+          <td>Rata-rata semua mata pelajaran semester 1–5 minimal 85</td>
+          <td>✅ Kemungkinan besar terpenuhi</td>
+        </tr>
+        <tr>
+          <td><strong>Sertifikat Bahasa</strong></td>
+          <td>IELTS/TOEFL untuk tujuan luar negeri</td>
+          <td>🎯 Target IELTS 8.5 — excellent</td>
+        </tr>
+        <tr>
+          <td><strong>Prestasi</strong></td>
+          <td>Prestasi nasional/internasional jadi nilai tambah signifikan</td>
+          <td>✅ Sangat kuat (20+ awards)</td>
+        </tr>
+        <tr>
+          <td><strong>LoA (2026)</strong></td>
+          <td>Tahun 2026 LoA tidak lagi wajib saat daftar — disubmit setelah lolos seleksi</td>
+          <td>📝 Tetap siapkan LoA untuk proses</td>
+        </tr>
+        <tr>
+          <td><strong>Universitas Tujuan</strong></td>
+          <td>QS Subject Ranking Top 100 untuk bidang yang dipilih</td>
+          <td>✅ Semua uni di panduan ini memenuhi</td>
+        </tr>
+        <tr>
+          <td><strong>Personal Statement</strong></td>
+          <td>Motivasi, alasan pilihan bidang, rencana kontribusi ke Indonesia</td>
+          <td>📝 Perlu disiapkan dengan matang</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="garuda-card">
+    <h3>💰 Cakupan Beasiswa Garuda (Fully Funded)</h3>
+    <table class="info-table">
+      <thead><tr><th>Komponen</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tuition Fee</strong></td><td>Dibayar langsung ke universitas, full/at cost sesuai tagihan resmi</td></tr>
+        <tr><td><strong>Living Allowance</strong></td><td>Uang saku bulanan (besaran bervariasi sesuai kota/negara)</td></tr>
+        <tr><td><strong>Housing</strong></td><td>Tunjangan akomodasi atau reimbursement</td></tr>
+        <tr><td><strong>Transport Internasional</strong></td><td>Tiket pesawat PP Indonesia–negara tujuan</td></tr>
+        <tr><td><strong>Tunjangan Buku</strong></td><td>Dana tahunan untuk buku akademik & jurnal</td></tr>
+        <tr><td><strong>Biaya Pendaftaran</strong></td><td>Reimbursement biaya daftar universitas</td></tr>
+        <tr><td><strong>Asuransi Kesehatan</strong></td><td>Termasuk dalam cakupan</td></tr>
+        <tr><td><strong>Kedatangan</strong></td><td>Tunjangan settlement di awal</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="garuda-card">
+    <h3>🎯 Bidang Prioritas — Mana yang Paling Tepat untuk Anakya?</h3>
+    <table class="info-table">
+      <thead><tr><th>Bidang Prioritas</th><th>Sub-bidang Relevan</th><th>Cocok?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>🥇 Digitalisasi, AI & Semikonduktor</strong></td>
+          <td>Kecerdasan Buatan, IoT, desain chip, keamanan siber, superkomputer</td>
+          <td>✅✅ SANGAT COCOK — paling langsung relevant dengan CS/Data Science</td>
+        </tr>
+        <tr>
+          <td><strong>🥈 Kesehatan</strong></td>
+          <td>Bioinformatika, alat kesehatan berbasis AI</td>
+          <td>✅ Relevan — proyek SEEHUY & MASKUMA mendukung narrative ini</td>
+        </tr>
+        <tr>
+          <td><strong>🥉 Energi</strong></td>
+          <td>Teknologi energi terbarukan, monitoring systems</td>
+          <td>✅ Relevan — proyek SIBER Biogas mendukung</td>
+        </tr>
+        <tr>
+          <td><strong>Ketahanan Pangan</strong></td>
+          <td>Agritech, precision agriculture</td>
+          <td>🟡 Bisa dikaitkan tapi kurang kuat untuk profile kamu</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="infobox infobox-gold" style="margin-top:16px;">
+      <div class="infobox-title">Rekomendasi: Pilih Digitalisasi AI & Semikonduktor sebagai Bidang Utama</div>
+      <p>Data Science dan Computer Science paling langsung align dengan bidang ini. Kamu bisa justify dengan semua proyek AI/IoT yang sudah kamu buat: CETTA (NLP), SEEHUY (Speech-to-Text), SIBER (IoT), MILESTONE (data analytics). Narrative yang kuat: "saya akan menjadi data scientist yang membangun infrastruktur digital Indonesia."</p>
+    </div>
+  </div>
+
+  <div class="garuda-card">
+    <h3>📅 Jadwal Beasiswa Garuda 2026 (Gelombang 2 — Untuk Gambaran)</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">25 Mei – 25 Juni 2026</div>
+        <div class="tl-title">Pendaftaran Gelombang 2 (SEDANG BUKA)</div>
+        <div class="tl-desc">Upload semua dokumen di walpdp-terintegrasi.kemenkeu.go.id</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">25 Juni – 10 Juli 2026</div>
+        <div class="tl-title">Seleksi Administrasi</div>
+        <div class="tl-desc">Verifikasi kelengkapan dokumen</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">25–30 Juli 2026</div>
+        <div class="tl-title">Tes Bakat Skolastik (TBS)</div>
+        <div class="tl-desc">Computer-based test: logika, verbal, numerik</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">5 Agustus 2026</div>
+        <div class="tl-title">Pengumuman Hasil Administrasi</div>
+        <div class="tl-desc">—</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2027</div>
+        <div class="tl-title">Gelombang untuk Angkatan 2027 (prediksi)</div>
+        <div class="tl-desc">Kamu perlu apply di cycle 2027 dengan LoA universitas tujuan. Mulai persiapan dari sekarang.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="garuda-card">
+    <h3>📎 Dokumen yang Harus Disiapkan (Mulai dari Sekarang!)</h3>
+    <table class="info-table">
+      <thead><tr><th>Dokumen</th><th>Keterangan</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>KTP / KK / Paspor</td><td>Pastikan paspor masih berlaku >1.5 tahun dari rencana keberangkatan</td><td>⚠️ Cek validity</td></tr>
+        <tr><td>Nilai Rapor Sem 1–5</td><td>Rata-rata minimal 85. Format PDF.</td><td>⚠️ Kumpulkan sekarang</td></tr>
+        <tr><td>Ijazah SMA</td><td>Diterjemahkan (sworn translation ke Inggris)</td><td>📝 Akan ada saat lulus 2027</td></tr>
+        <tr><td>Sertifikat IELTS</td><td>Min. sesuai syarat uni, target 8.5</td><td>🎯 Persiapkan test sekarang</td></tr>
+        <tr><td>Bukti Prestasi</td><td>Download dari puspresnas.go.id untuk yang terdaftar di sana</td><td>⚠️ Download sekarang</td></tr>
+        <tr><td>Surat Keterangan Sehat</td><td>Dari RS atau fasilitas kesehatan resmi</td><td>📝 Urus mendekati deadline</td></tr>
+        <tr><td>Surat Bebas Narkoba</td><td>Dari BNN atau fasilitas resmi</td><td>📝 Urus mendekati deadline</td></tr>
+        <tr><td>Personal Statement</td><td>Motivasi, bidang prioritas, rencana kontribusi</td><td>✍️ Mulai drafting sekarang</td></tr>
+        <tr><td>Letter of Acceptance (LoA)</td><td>Dari universitas QS Top 100 Subject pilihan</td><td>📝 Target dapatkan Q4 2026–Q1 2027</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline" class="section">
+  <div class="section-header">
+    <h2>📅 Master Timeline — Rencana Aksi Lengkap</h2>
+    <p>Dari sekarang (Jun 2026) hingga mulai kuliah (Sep 2027)</p>
+  </div>
+
+  <div class="infobox infobox-gold">
+    <div class="infobox-title">Kamu lulus SMA sekitar Juni/Juli 2027. Kuliah mulai September/Oktober 2027 (AS/UK) atau Februari 2028 (Australia Sem 1).</div>
+    <p>Deadline aplikasi yang paling penting: <strong>November 2026</strong> (AS Early Decision) dan <strong>Januari 2027</strong> (AS Regular Decision + UCAS UK). Australia dan Singapore bisa apply lebih late (sampai Nov 2026 – Feb 2027).</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Juni – Agustus 2026 (SEKARANG!)</div>
+      <div class="tl-title">🎯 Fase Persiapan Intensif</div>
+      <div class="tl-desc">
+        • Daftar IELTS test (target score 8.0+, idealnya 8.5)<br>
+        • Daftar SAT test (target 1550 — ambil Okt/Nov 2026)<br>
+        • Download semua sertifikat prestasi dari puspresnas.go.id<br>
+        • Buat akun Common App, UCAS, UC Application<br>
+        • Mulai riset profesor/lab di uni target (untuk essays)<br>
+        • Minta surat rekomendasi dari guru matematika dan guru bahasa Inggris
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">September – Oktober 2026</div>
+      <div class="tl-title">✍️ Fase Menulis Aplikasi</div>
+      <div class="tl-desc">
+        • Ambil SAT (Oktober 2026 adalah batas aman untuk ED Nov)<br>
+        • Selesaikan IELTS (jika belum ambil)<br>
+        • Tulis semua Common App essays + supplement essays (NYU, CMU, dll.)<br>
+        • Tulis UCAS Personal Statement (UK)<br>
+        • Minta LoA ke uni Australia & Singapore (apply portal)<br>
+        • Persiapkan translated ijazah rapor + sworn translation
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1 November 2026</div>
+      <div class="tl-title">🔴 DEADLINE KRITIS — US Early Decision / Early Action</div>
+      <div class="tl-desc">
+        • MIT Early Action: <strong>1 Nov</strong><br>
+        • NYU Early Decision I: <strong>1 Nov</strong><br>
+        • CMU Early Decision: <strong>1 Nov</strong><br>
+        • UMich Early Action: <strong>1 Nov</strong>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">30 November 2026</div>
+      <div class="tl-title">🔴 UC Application Deadline (UC Berkeley)</div>
+      <div class="tl-desc">Submit UC Application untuk UC Berkeley dan UC system lainnya</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Oktober – November 2026</div>
+      <div class="tl-title">🦅 Persiapan Beasiswa Garuda (untuk Gelombang 2027)</div>
+      <div class="tl-desc">
+        • Kumpulkan semua dokumen Garuda<br>
+        • Finalisasi personal statement Garuda (berbeda dari PS universitas)<br>
+        • Pantau kemdiktisaintek.go.id untuk jadwal gelombang 2027
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">31 Oktober – 30 November 2026</div>
+      <div class="tl-title">🇦🇺 Australia + 🇸🇬 Singapore Applications</div>
+      <div class="tl-desc">
+        • ANU: deadline 31 Okt 2026<br>
+        • University of Melbourne: deadline 31 Okt 2026 (untuk scholarship consideration)<br>
+        • UNSW: apply sebelum Nov 2026<br>
+        • NUS + NTU: deadline ~Feb 2027, tapi apply lebih awal = lebih baik
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1 Januari – 5 Januari 2027</div>
+      <div class="tl-title">🔴 US Regular Decision + UK UCAS Deadline</div>
+      <div class="tl-desc">
+        • MIT Regular: 1 Jan<br>
+        • NYU Regular / ED II: 5 Jan<br>
+        • CMU Regular: 1 Jan<br>
+        • UC Berkeley: sudah 30 Nov (lewat)<br>
+        • UCAS UK (Manchester, Edinburgh): 29 Jan 2027
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Desember 2026 – Maret 2027</div>
+      <div class="tl-title">📬 Mulai Menerima Keputusan</div>
+      <div class="tl-desc">
+        • MIT EA: mid-Desember 2026<br>
+        • NYU ED I: mid-Desember 2026<br>
+        • Australia/Singapore: rolling (2–6 minggu)<br>
+        • US Regular Decision: umumnya April 2027
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Februari – April 2027</div>
+      <div class="tl-title">🦅 Daftar Beasiswa Garuda 2027 (prediksi)</div>
+      <div class="tl-desc">
+        • Pantau beasiswagaruda.kemdiktisaintek.go.id untuk jadwal resmi<br>
+        • Submit aplikasi dengan LoA yang sudah kamu punya<br>
+        • Persiapkan Tes Bakat Skolastik
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1 Mei 2027</div>
+      <div class="tl-title">🎓 National Decision Day (AS)</div>
+      <div class="tl-desc">Deadline konfirmasi penerimaan ke universitas AS. Bayar deposit.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Juni – Agustus 2027</div>
+      <div class="tl-title">📝 Pre-Departure</div>
+      <div class="tl-desc">Urus visa (F-1 untuk AS, Student Visa untuk UK/Australia), akomodasi, orientasi</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">September 2027</div>
+      <div class="tl-title">🎓 Mulai Kuliah! (AS/UK/Singapore)</div>
+      <div class="tl-desc">Australia: Februari 2028 (Semester 1)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ASSESSMENT -->
+<div id="assessment" class="section">
+  <div class="section-header">
+    <h2>📊 Assessment — Peluang & Prioritasi</h2>
+    <p>Berdasarkan CV kamu (dengan asumsi SAT 1550 + IELTS 8.5 tercapai)</p>
+  </div>
+
+  <div class="infobox infobox-teal">
+    <div class="infobox-title">Metodologi Penilaian</div>
+    <p>Penilaian ini mempertimbangkan: profil akademik (rapor, prestasi), target test scores, acceptance rate historis, kesulitan essay, dan seberapa baik story kamu "fit" dengan value masing-masing universitas. Ini perkiraan — admission tidak pernah pasti 100%.</p>
+  </div>
+
+  <div class="assessment-wrap">
+    <table class="assessment-table">
+      <thead>
+        <tr>
+          <th>Universitas</th>
+          <th>Negara</th>
+          <th>Program</th>
+          <th>Acceptance Rate (General)</th>
+          <th>Peluang Anakya</th>
+          <th>Kategori</th>
+          <th>Prioritas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>MIT</strong></td>
+          <td>🇺🇸 AS</td>
+          <td>BS CS/EECS</td>
+          <td>~3–4% (intl ~2%)</td>
+          <td class="chance-low">5–10%</td>
+          <td><span class="pill pill-focus">REACH</span></td>
+          <td>Daftar — worth it</td>
+        </tr>
+        <tr>
+          <td><strong>CMU</strong></td>
+          <td>🇺🇸 AS</td>
+          <td>BS Stat & ML</td>
+          <td>~11%</td>
+          <td class="chance-low">10–18%</td>
+          <td><span class="pill pill-focus">REACH</span></td>
+          <td>Daftar — less competitive than CS SCS</td>
+        </tr>
+        <tr>
+          <td><strong>UC Berkeley</strong></td>
+          <td>🇺🇸 AS</td>
+          <td>BS Data Science</td>
+          <td>~11–14%</td>
+          <td class="chance-med">15–25%</td>
+          <td><span class="pill pill-focus">REACH/MATCH</span></td>
+          <td>Prioritas tinggi</td>
+        </tr>
+        <tr>
+          <td><strong>NYU</strong></td>
+          <td>🇺🇸 AS</td>
+          <td>BS CS & Data Sci</td>
+          <td>~9–12%</td>
+          <td class="chance-med">20–30% (ED boost)</td>
+          <td><span class="pill pill-focus">MATCH</span></td>
+          <td>Prioritas tinggi — kota impian</td>
+        </tr>
+        <tr>
+          <td><strong>University of Michigan</strong></td>
+          <td>🇺🇸 AS</td>
+          <td>BS Data Science</td>
+          <td>~17–20%</td>
+          <td class="chance-med">25–35%</td>
+          <td><span class="pill pill-backup">MATCH</span></td>
+          <td>Solid choice</td>
+        </tr>
+        <tr>
+          <td><strong>ANU</strong></td>
+          <td>🇦🇺 AUS</td>
+          <td>B.Adv Computing (Hons)</td>
+          <td>~35–45%</td>
+          <td class="chance-high">55–70%</td>
+          <td><span class="pill pill-valid">LIKELY</span></td>
+          <td>Prioritas tinggi, Honours + scholarship</td>
+        </tr>
+        <tr>
+          <td><strong>Univ. Melbourne</strong></td>
+          <td>🇦🇺 AUS</td>
+          <td>BSc CS / Data Science</td>
+          <td>~40–50%</td>
+          <td class="chance-high">60–75%</td>
+          <td><span class="pill pill-valid">LIKELY</span></td>
+          <td>Prioritas tinggi, scholarship tersedia</td>
+        </tr>
+        <tr>
+          <td><strong>UNSW Sydney</strong></td>
+          <td>🇦🇺 AUS</td>
+          <td>BS Data Science & Decisions</td>
+          <td>~45–55%</td>
+          <td class="chance-high">65–80%</td>
+          <td><span class="pill pill-valid">LIKELY</span></td>
+          <td>Scientia Scholarship = VERY worth it</td>
+        </tr>
+        <tr>
+          <td><strong>Monash</strong></td>
+          <td>🇦🇺 AUS</td>
+          <td>BS CS (Hons)</td>
+          <td>~60–70%</td>
+          <td class="chance-high">75–85%</td>
+          <td><span class="pill pill-backup">SAFETY</span></td>
+          <td>Back-up solid</td>
+        </tr>
+        <tr>
+          <td><strong>NUS</strong></td>
+          <td>🇸🇬 SG</td>
+          <td>BSc CS / Data Science</td>
+          <td>~20–30%</td>
+          <td class="chance-med">30–45%</td>
+          <td><span class="pill pill-focus">MATCH</span></td>
+          <td>Prioritas, Garuda + NUS scholarship</td>
+        </tr>
+        <tr>
+          <td><strong>NTU</strong></td>
+          <td>🇸🇬 SG</td>
+          <td>BSc DS & AI</td>
+          <td>~20–30%</td>
+          <td class="chance-med">30–45%</td>
+          <td><span class="pill pill-focus">MATCH</span></td>
+          <td>Prioritas, ASEAN scholarship tersedia</td>
+        </tr>
+        <tr>
+          <td><strong>Univ. Manchester</strong></td>
+          <td>🇬🇧 UK</td>
+          <td>BSc Data Science (Hons)</td>
+          <td>~33–40%</td>
+          <td class="chance-high">55–70%</td>
+          <td><span class="pill pill-valid">LIKELY</span></td>
+          <td>Prioritas UK, £30K scholarship tersedia</td>
+        </tr>
+        <tr>
+          <td><strong>Univ. Edinburgh</strong></td>
+          <td>🇬🇧 UK</td>
+          <td>BSc CS (Hons) / AI</td>
+          <td>~35–45%</td>
+          <td class="chance-high">55–70%</td>
+          <td><span class="pill pill-valid">LIKELY</span></td>
+          <td>Solid UK option</td>
+        </tr>
+        <tr>
+          <td><strong>Univ. of Toronto</strong></td>
+          <td>🇨🇦 CA</td>
+          <td>BSc CS (Hons)</td>
+          <td>~40–45%</td>
+          <td class="chance-high">50–65%</td>
+          <td><span class="pill pill-backup">MATCH</span></td>
+          <td>Pearson Scholarship = full funding</td>
+        </tr>
+        <tr>
+          <td><strong>TU Delft</strong></td>
+          <td>🇳🇱 NL</td>
+          <td>BSc CS & Engineering</td>
+          <td>~50–60%</td>
+          <td class="chance-high">65–80%</td>
+          <td><span class="pill pill-backup">LIKELY</span></td>
+          <td>Tuition paling murah, alternatif bagus</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="infobox infobox-sky" style="margin-top:28px;">
+    <div class="infobox-title">📌 Rekomendasi Final Portfolio Aplikasi (8–12 aplikasi)</div>
+    <ul>
+      <li><strong>REACH (2–3 uni):</strong> MIT, CMU, UC Berkeley — low probability tapi worth trying</li>
+      <li><strong>FOKUS UTAMA (3–4 uni):</strong> NYU, NUS, UNSW, Manchester — realistic + strong profile fit</li>
+      <li><strong>SAFETY (2–3 uni):</strong> Monash, Edinburgh, TU Delft + 1 uni lagi — highly likely accept</li>
+      <li><strong>Beasiswa Garuda:</strong> Submit dengan semua LoA yang kamu dapat — prioritaskan bidang Digitalisasi AI</li>
+    </ul>
+  </div>
+
+  <div class="tips-grid" style="margin-top:24px;">
+    <div class="tip-card">
+      <h4><span class="tip-icon">🎖️</span> Kekuatan Unik Kamu</h4>
+      <ul>
+        <li>Spokesperson Parlemen DPR RI (Top 1.6% dari 8.345 pelamar)</li>
+        <li>Grand Champion di Universitas Indonesia</li>
+        <li>Developer AI product (CETTA) dan IoT project</li>
+        <li>HKI (Intellectual Property) untuk research framework</li>
+        <li>HundrED Youth Committee — global education innovation</li>
+        <li>Samsung Innovation Campus (twice finalist)</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <h4><span class="tip-icon">⚡</span> Yang Perlu Diperkuat Sebelum Apply</h4>
+      <ul>
+        <li>SAT 1550 — ambil Oct 2026 (ada waktu retake jika perlu)</li>
+        <li>IELTS 8.0+ — ambil secepatnya (validity 2 tahun)</li>
+        <li>Update CV dengan semua achievement terbaru</li>
+        <li>Minta rekomendasi dari mentor AFS / pembina Parlemen Remaja</li>
+        <li>Buat GitHub dengan CETTA & proyek lainnya (sangat membantu untuk CS)</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  Dibuat untuk <span>Anakya Danke Cetta Akhbar</span> · Data akurat per Juni 2026 · Selalu konfirmasi ke website resmi masing-masing universitas untuk informasi terkini · <span>beasiswagaruda.kemdiktisaintek.go.id</span>
+</footer>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.nav-tabs').offsetTop - 10, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
